@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-// fibonacciRecursive é a função que calcula o enésimo elemento da sequência fibonacci
+// fibonacciRecursive é a função que calcula o enésimo elemento da sequência fibonacci de forma recursiva
 func fibonacciRecursive(x uint64) uint64 {
 	if x <= 1 {
 		return x
@@ -10,7 +10,8 @@ func fibonacciRecursive(x uint64) uint64 {
 	return fibonacciRecursive(x-1) + fibonacciRecursive(x-2)
 }
 
-// func fibonacci(n uint64) uint64 {
+// fibonacciIterativeé a função que calcula o enésimo elemento da sequência fibonacci de forma iterativa
+// func fibonacciIterative(n uint64) uint64 {
 // 	a := 0
 // 	b := 1
 // 	for i := 0; i < n; i++ {
@@ -21,6 +22,7 @@ func fibonacciRecursive(x uint64) uint64 {
 // 	return a
 // }
 
+// startFib executa a função fibonacci e retorna o resultado no canal returnCh
 func startFib(input uint64, returnCh chan FibResult) {
 	start := time.Now()
 	result := fibonacciRecursive(input)
@@ -34,6 +36,8 @@ func startFib(input uint64, returnCh chan FibResult) {
 
 }
 
+// callFib é responsável por verificar se a função fibonacci ja foi chamada para o input atual,
+// caso não foi chamada, executa com o timeout requisitado, no fim salva o resultado no map
 func callFib(input uint64, timeout time.Duration) FibResponse {
 	result, ok := SavedResponses.Load(input)
 	if ok {

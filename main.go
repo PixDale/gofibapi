@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-var SavedResponses sync.Map
+var SavedResponses sync.Map // map thread safe
 
 func main() {
 	app := fiber.New()
