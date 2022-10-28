@@ -6,13 +6,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-//var SavedResponses map[uint64]FibResult
-
 var SavedResponses sync.Map
 
 func main() {
 	app := fiber.New()
-	//SavedResponses = make(map[uint64]FibResult)
+
 	SavedResponses = sync.Map{}
 
 	app.Get("/", helloHandler)
