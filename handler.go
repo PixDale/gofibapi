@@ -28,8 +28,7 @@ func fibHandler(c *fiber.Ctx) error {
 	inputStr := c.Params("input")
 	input, err := strconv.Atoi(inputStr)
 	if err != nil {
-		c.Status(fiber.StatusBadRequest).SendString(err.Error())
-		return err
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
 	response := callFib(uint64(input), TIMEOUT)
 	return c.Status(fiber.StatusOK).JSON(response)
